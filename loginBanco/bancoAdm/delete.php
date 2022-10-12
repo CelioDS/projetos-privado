@@ -31,7 +31,9 @@ if (!empty($_GET['id'])) {
                </script>';
     } else {
         header('location: bancoadm.php');
+        die;
     }
 } else {
     header('location: bancoadm.php');
+    die;
 }

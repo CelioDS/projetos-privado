@@ -7,10 +7,9 @@ $senha = strip_tags(md5($_POST['txtsenha']));
 $nivel = strip_tags($_POST['txtnivel']);
 
 //evitar  login sem acesso
-if ($nome == '' && md5($senha == '')) {
-    echo  '<script>
-            window.location.href="../index.html";
-        </script>';
+if (empty($nome) && empty(md5($senha))) {
+    header('location: ../index.html');
+    die;
 }
 
 $comandoSQL1 = "INSERT INTO usuarios (usuario, senha, nivel) VALUE ('$nome','$senha', '$nivel')";

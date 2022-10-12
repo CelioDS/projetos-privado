@@ -9,10 +9,7 @@ $usuario = strip_tags($_POST['txtnome']);
 $senha =  strip_tags(md5($_POST['txtsenha']));
 
 // passando valores para outras paginas
-$_SESSION['usuario'] = strip_tags($usuario);
 
-$_SESSION['usuarioL'] =  $usuario;
-$_SESSION['senhaL'] = $senha;
 
 
 $comandoSQL = "SELECT * FROM usuarios WHERE usuario='$usuario' AND senha='$senha' AND nivel='Usuario'  ";
@@ -35,25 +32,30 @@ if (mysqli_num_rows($loginAdm) >= 1) {
   alerta2("success", "Acesso liberado", "Bem vindo Administrador", 1900);
 
   $_SESSION['nivel'] = 'Administrador';
+  $_SESSION['usuario'] = strip_tags($usuario);
+  $_SESSION['usuarioL'] =  $usuario;
+  $_SESSION['senhaL'] = '123ada4';
 
   echo  '<script>
   setTimeout(function () {
     window.location.href="../bancoAdm/bancoadm.php";
   },1900);
   </script>';
-}
- else if (mysqli_num_rows($login) >= 1) {
+} else if (mysqli_num_rows($login) >= 1) {
 
   alerta2("success", "Acesso liberado", "Bem vindo Usuario", 1900);
   $_SESSION['nivel'] = 'Usuario';
+  $_SESSION['usuario'] = strip_tags($usuario);
+  $_SESSION['usuarioL'] =  $usuario;
+  $_SESSION['senhaL'] = '123ada4';
 
   echo  '<script>
   setTimeout(function () {
     window.location.href="../banco/cadastro.php";
   },1900);
   </script>';
-}
- else if (mysqli_num_rows($login) === 0 && mysqli_num_rows($loginAdm) === 0) {
+} else if (mysqli_num_rows($login) === 0 && mysqli_num_rows($loginAdm) === 0) {
+
   alerta2("error", "Usuario nao cadastrado", "tente novamente", 1900);
 
   echo  '<script>
@@ -63,8 +65,7 @@ if (mysqli_num_rows($loginAdm) >= 1) {
    </script>';
 }
 
-if($_SESSION['usuarioL'] == '' && $_SESSION['senhaL'] == ''){
-  echo  '<script>
-          window.location.href="../index.html";
-      </script>';
+if (empty($_SESSION['usuarioL']) && empty($_SESSION['senhaL'])) {
+  header('location: ../index.html');
+  die;
 }

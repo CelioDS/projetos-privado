@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (empty($_SESSION['usuarioL']) && empty($_SESSION['senhaL'])) {
+    header('location: ../index.html');
+    die;
+}
+
 // se nao estiver vazio trazer os dados
 if (!empty($_GET['id'])) {
     include_once('../php/conexao.php');
@@ -28,9 +33,11 @@ if (!empty($_GET['id'])) {
         }
     } else {
         header('location: bancoadm.php');
+        die;
     }
 } else {
     header('location: bancoadm.php');
+    die;
 }
 ?>
 <!DOCTYPE html>
@@ -56,10 +63,12 @@ if (!empty($_GET['id'])) {
     </div>
 
 
-    <div class="perfil">
+    <aside class="perfil">
         <p><?php echo $_SESSION['usuario']  ?></p>
         <p><?php echo $_SESSION['nivel']  ?> </p>
-    </div>
+        <p><?php $hoje = date('d/m/Y');
+            echo $hoje; ?> </p>
+    </aside>
 
 
 

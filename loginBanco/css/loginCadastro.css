@@ -23,34 +23,45 @@ section {
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-
     position: relative;
     width: 100%;
-    max-width: 98%;
+    max-width: 350px;
     margin: auto;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+
     /* 
-    border: 1px solid rgb(255, 72, 0);
-    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: -10px 10px 10px 10px grey;
     */
-
 }
 
 .cadastrar,
 .entrar {
-
-    background-image: linear-gradient(blue);
-    border-radius: 5px;
-    width: 250px;
-    margin-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width:280px;
+    margin: auto;  
+    padding: 0 15px 15px;
 }
+.figura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width:280px;
+    margin: auto;
+  
 
+}
 
 
 button {
-    position: relative;
-    left: 74px;
+   position: relative;
 }
+
+
 
 
 .btnentrar,
@@ -60,15 +71,17 @@ button {
     border-radius: 15px;
     border: 1px solid rgb(255, 0, 0);
     background-color: white;
-    width: 100px;
+    width: 100%;
+    max-width:280px;
+    margin: auto;
     cursor: pointer;
-    color: rgb(255, 0, 0);
-
+    color: rgb(255, 0, 0);  
 }
 
 .btnentrar:hover,
 .btncadastrar:hover {
     opacity: 0.9;
+ 
 }
 
 
@@ -134,6 +147,7 @@ input:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
+
 .labelselect {
     padding-left: 10px;
 }
@@ -194,12 +208,7 @@ option {
 
 }
 
-.figura {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-}
 
 
 

@@ -31,8 +31,6 @@ if (isset($_POST['cep'])) {
             $adress->cep = "";
             $adress->uf = "";
             $adress->localidade = "";
-
-            
         }
 
         echo json_encode($adress);
@@ -49,11 +47,9 @@ if (isset($_POST['cep'])) {
 
         echo json_encode($adress);
     }
-}
-else{
+} else {
 
-    echo  '<script>
-            window.location.href="../index.html";
-        </script>';
+
+    header('location: ../index.html');
+    die;
 }
-    

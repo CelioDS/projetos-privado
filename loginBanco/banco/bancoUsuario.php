@@ -2,10 +2,9 @@
 session_start();
 include('../php/conexao.php');
 
-if($_SESSION['usuarioL'] == '' && $_SESSION['senhaL'] == ''){
-    echo  '<script>
-            window.location.href="../index.html";
-        </script>';
+if (empty($_SESSION['usuarioL']) && empty($_SESSION['senhaL'])) {
+    header('location: ../index.html');
+    die;
 }
 ?>
 
@@ -80,7 +79,7 @@ if($_SESSION['usuarioL'] == '' && $_SESSION['senhaL'] == ''){
                 // trata o erro de select inject
                 $pesquisa = $conexao->real_escape_string($_GET['busca']);
 
-                $consulta = "SELECT* FROM usuarios WHERE nome LIKE '%$pesquisa%' AND  id  LIMIT 5 ";
+                $consulta = "SELECT* FROM usuarios WHERE nome LIKE '%$pesquisa%' OR id LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' AND  id  LIMIT 5 ";
                 $sql_consulta = $conexao->query($consulta) or die("ERRO ao consultar" . $mysqli->error);
 
                 if ($sql_consulta->num_rows == 0) {

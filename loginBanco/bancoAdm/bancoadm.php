@@ -3,14 +3,10 @@ session_start();
 include('../php/conexao.php');
 // trata o erro de select inject
 
-
-if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
-    echo  '<script>
-            window.location.href="../index.html";
-        </script>';
+if (empty($_SESSION['usuarioL']) && empty($_SESSION['senhaL'])) {
+    header('location: ../index.html');
+    die;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +17,7 @@ if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bancoDeDados.css">
-    <link rel="stylesheet" type="text/css" href="../css/bancos.css?v=<?= filemtime($file); ?>">
+    <link rel="stylesheet" type="text/css" href="../css/bancoDeDados.css?v=<?= filemtime($file); ?>">
     <link rel="shortcut icon" href="../imagem/as.ico" type="img/x-icon">
     <script src="https://cdn.jsdelivr.net/gh/brunoalbim/devtools-detect/index.js"></script>
     <title>sistema de busca</title>
@@ -30,7 +26,7 @@ if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
 <body>
 
     <header>
-        <button class="cadastro"><a href="../index.html">
+        <button class="cadastro"><a href="../php/sair.php">
                 < Sair</a></button>
 
 
@@ -85,7 +81,7 @@ if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
                 // trata o erro de select inject
                 $pesquisa = $conexao->real_escape_string($_GET['busca']);
 
-                $consulta = "SELECT* FROM usuarios WHERE nome LIKE '%$pesquisa%' LIMIT 5  ";
+                $consulta = "SELECT* FROM usuarios WHERE nome LIKE '%$pesquisa%' OR id LIKE '%$pesquisa%' LIMIT 5  ";
                 $sql_consulta = $conexao->query($consulta) or die("ERRO ao consultar" . $mysqli->error);
 
                 if ($sql_consulta->num_rows == 0) {

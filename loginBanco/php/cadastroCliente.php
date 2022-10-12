@@ -1,6 +1,6 @@
 <?php
 include('scripts.php');
-$Email = '';
+
 
 // se existe o submit informacoes sao enviadas
 if (isset($_POST['submit'])) {
@@ -31,23 +31,20 @@ if (isset($_POST['submit'])) {
         if (mysqli_num_rows($ConsultaDados1) >= 1) {
             alerta2("error", "Email e Telefone ja cadastrado.", "Tente novamente.", 1900);
         }
-          echo  '<script>
+        echo  '<script>
                     setTimeout(function () {
                          window.location.href="../banco/cadastro.php";
                      },1900);
                 </script>';
-        
-    }
-    else if (mysqli_num_rows($ConsultaDados1) >= 1){
+    } else if (mysqli_num_rows($ConsultaDados1) >= 1) {
         alerta2("error", "Telefone ja cadastrado.", "Tente novamente.", 1900);
-    
-      echo  '<script>
+
+        echo  '<script>
                 setTimeout(function () {
                      window.location.href="../banco/cadastro.php";
                  },1900);
             </script>';
-    }    
-    else {
+    } else {
         $result =  "INSERT INTO usuarios(nome,email,telefone,sexo,data_nasc,cidade,estado,cep) VALUES('$nome', '$email', '$telefone', '$sexo', '$data_nasc', '$cidade', '$estado', '$cep')";
 
         // verifica e envia 
@@ -73,11 +70,7 @@ if (isset($_POST['submit'])) {
         mysqli_close($conexao);
     }
 } else {
-    echo  '<script>
-            window.location.href="../banco/cadastro.php";
-        </script>';
+
+    header('location: ../banco/cadastro.php');
+    die;
 }
-
-
-
-

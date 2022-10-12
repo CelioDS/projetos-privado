@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
-    echo  '<script>
-            window.location.href="../index.html";
-        </script>';
+if (empty($_SESSION['usuarioL']) && empty($_SESSION['senhaL'])) {
+    header('location: ../index.html');
+    die;
 }
 ?>
 
@@ -26,15 +25,21 @@ if($_SESSION['usuarioL']== '' && $_SESSION['senhaL'] == ''){
 
 <body>
     <div class="areabtn">
-        <button class="cadastro"><a href="../index.html">
-                < Sair </Voltar>
-            </a></button>
-        <button class="cadastro"><a href="bancoUsuario.php">BANCO DE DADOS ></a></button>
+        <button class="cadastro">
+            <a href="../php/sair.php">
+                < Sair </a>
+        </button>
+
+        <button class="cadastro">
+            <a href="bancoUsuario.php">BANCO DE DADOS ></a>
+        </button>
+
     </div>
 
-    <aside>
-        <p>Usuario: <?php echo $_SESSION['usuario']  ?></p>
-        <p>Nivel: <?php echo $_SESSION['nivel']  ?> </p>
+    <aside class="perfil">
+        <p><?php echo $_SESSION['usuario']  ?></p>
+        <p><?php echo $_SESSION['nivel']  ?> </p>
+        <p><?php $hoje = date('d/m/Y'); echo $hoje; ?> </p>
     </aside>
 
 
